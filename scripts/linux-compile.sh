@@ -1,7 +1,7 @@
 #!/bin/bash -xe
 #
 
-DESTDIR="$(pwd)/linux-inst"
+DESTDIR="/usr/local"
 
 # set defaults
 [ -z "${CLEAN}" ] && CLEAN=1
@@ -21,7 +21,7 @@ if [ ${PROFILE} -eq 1 ]; then
 fi
 
 # clean destdir
-rm -rf ${DESTDIR}
+#rm -rf ${DESTDIR}
 
 cd ibrcommon
 if [ ${CLEAN} -eq 1 ]; then
@@ -30,7 +30,7 @@ if [ ${CLEAN} -eq 1 ]; then
     ./configure --prefix=${DESTDIR} --with-openssl --with-lowpan
 fi
 make -j
-make install
+sudo make install
 cd ..
 
 cd ibrdtn/ibrdtn
@@ -40,7 +40,7 @@ if [ ${CLEAN} -eq 1 ]; then
     ./configure --prefix=${DESTDIR} --with-dtnsec --with-compression
 fi
 make -j
-make install
+sudo make install
 cd ..
 
 cd daemon
@@ -50,7 +50,7 @@ if [ ${CLEAN} -eq 1 ]; then
     ./configure --prefix=${DESTDIR} --with-curl --with-lowpan --with-sqlite --with-dtnsec --with-compression --with-tls --with-cppunit 
 fi
 make -j
-make install
+sudo make install
 cd ..
 cd ..
 
